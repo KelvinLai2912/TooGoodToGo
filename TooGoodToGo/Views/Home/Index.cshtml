@@ -1,4 +1,4 @@
-﻿@{
+﻿ @{
     ViewData["Title"] = "Home";
 }
 
@@ -11,96 +11,85 @@
                     Reserveer voordelige maaltijdpakketten en help voedselverspilling verminderen.
                 </p>
 
-                <!-- Hoofdacties -->
                 <div class="row g-2">
                     <div class="col-12 col-sm-6">
-                        <a href="~/Account/Login" class="btn btn-light w-100 py-3 tg-btn">
+                        <a asp-controller="Account" asp-action="Login" class="btn btn-tg-primary w-100 py-3">
                             <i class="bi bi-box-arrow-in-right me-2"></i>Login
                         </a>
                     </div>
                     <div class="col-12 col-sm-6">
-                        <a href="~/Packages" class="btn btn-outline-light w-100 py-3 tg-btn">
+                        <a asp-controller="Packages" asp-action="Index" class="btn btn-tg-outline w-100 py-3">
                             <i class="bi bi-bag-heart me-2"></i>Bekijk pakketten
                         </a>
                     </div>
                     <div class="col-12 col-sm-6">
-                        <a href="~/Reservations/MyReservations" class="btn btn-outline-light w-100 py-3 tg-btn">
+                        <a asp-controller="Reservations" asp-action="MyReservations" class="btn btn-tg-outline w-100 py-3">
                             <i class="bi bi-bookmark-check me-2"></i>Mijn reserveringen
                         </a>
                     </div>
-                    <div class="col-12 col-sm-6">
-                        <a href="~/Packages/Create" class="btn btn-outline-light w-100 py-3 tg-btn">
-                            <i class="bi bi-plus-circle me-2"></i>Pakket aanbieden
-                        </a>
-                    </div>
+                    @if (User.IsInRole("KantineMedewerker"))
+                    {
+                        <div class="col-12 col-sm-6">
+                            <a asp-controller="Packages" asp-action="Create" class="btn btn-tg-outline w-100 py-3">
+                                <i class="bi bi-plus-circle me-2"></i>Pakket aanbieden
+                            </a>
+                        </div>
+                    }
+                </div>
+
+                <div class="d-flex align-items-center gap-4 mt-4 small opacity-75">
+                    <div><i class="bi bi-geo-alt me-1"></i> Breda · Den Bosch · Tilburg</div>
+                    <div><i class="bi bi-people me-1"></i> Studenten & medewerkers</div>
+                    <div><i class="bi bi-cloud-upload me-1"></i> CI/CD naar Azure</div>
                 </div>
             </div>
 
             <div class="col-lg-6 text-center">
-                <img src="~/img/Image1.png" alt="Maaltijdpakketten" class="img-fluid rounded shadow-lg tg-hero-img">
+                <img src="~/img/Image1.png" class="img-fluid rounded shadow-lg tg-hero-img" alt="Maaltijdpakketten">
             </div>
         </div>
     </div>
 </section>
 
-<!-- Info Cards -->
 <section class="container my-5">
     <div class="row g-4">
         <div class="col-md-4">
-            <div class="card h-100 shadow-sm tg-card">
+            <div class="card tg-card h-100 shadow-sm">
+                <div class="card-header"><i class="bi bi-geo-alt me-1"></i> Filter op locatie</div>
                 <div class="card-body">
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="bi bi-geo-alt fs-3 me-2"></i>
-                        <h5 class="card-title mb-0">Filter op locatie</h5>
-                    </div>
-                    <p class="card-text">
-                        Vind snel pakketten in <strong>Breda</strong>, <strong>Den Bosch</strong> of <strong>Tilburg</strong>.
-                    </p>
-                    <a href="~/Packages?city=Breda" class="stretched-link">Bekijk pakketten →</a>
+                    <p>Vind snel pakketten in jouw stad en favoriete kantine.</p>
+                    <a asp-controller="Packages" asp-action="Index" class="stretched-link">Naar pakketten →</a>
                 </div>
             </div>
         </div>
-
         <div class="col-md-4">
-            <div class="card h-100 shadow-sm tg-card">
+            <div class="card tg-card h-100 shadow-sm">
+                <div class="card-header"><i class="bi bi-list-check me-1"></i> Voorbeeldinhoud</div>
                 <div class="card-body">
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="bi bi-list-check fs-3 me-2"></i>
-                        <h5 class="card-title mb-0">Voorbeeldinhoud</h5>
-                    </div>
-                    <p class="card-text">
-                        Zie indicatieve producten per pakket—handig om te kiezen wat bij jou past.
-                    </p>
-                    <a href="~/Packages" class="stretched-link">Bekijk voorbeelden →</a>
+                    <p>Zie indicatieve producten per pakket—handig om te kiezen.</p>
+                    <a asp-controller="Packages" asp-action="Index" class="stretched-link">Bekijk →</a>
                 </div>
             </div>
         </div>
-
         <div class="col-md-4">
-            <div class="card h-100 shadow-sm tg-card">
+            <div class="card tg-card h-100 shadow-sm">
+                <div class="card-header"><i class="bi bi-shield-check me-1"></i> 18+ controle</div>
                 <div class="card-body">
-                    <div class="d-flex align-items-center mb-3">
-                        <i class="bi bi-people fs-3 me-2"></i>
-                        <h5 class="card-title mb-0">Voor medewerkers</h5>
-                    </div>
-                    <p class="card-text">
-                        Beheer pakketten, voorkom dubbele reserveringen en markeer no-shows.
-                    </p>
-                    <a href="~/Packages/Create" class="stretched-link">Start met aanbieden →</a>
+                    <p>Alcoholhoudende pakketten alleen zichtbaar voor 18+ studenten.</p>
+                    <span class="badge">Regel actief</span>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- Call to Action -->
 <section class="container my-5">
-    <div class="tg-cta p-4 p-md-5 rounded-4 text-center text-md-start d-md-flex align-items-center justify-content-between">
+    <div class="tg-cta p-4 p-md-5 d-md-flex align-items-center justify-content-between">
         <div class="mb-3 mb-md-0">
             <h4 class="mb-2">Klaar om te starten?</h4>
             <p class="mb-0">Log in en maak vandaag nog impact tegen voedselverspilling.</p>
         </div>
-        <a href="~/Account/Login" class="btn btn-dark btn-lg mt-3 mt-md-0">
+        <a asp-controller="Account" asp-action="Login" class="btn btn-dark btn-lg mt-3 mt-md-0">
             <i class="bi bi-person-check me-2"></i>Inloggen
         </a>
     </div>

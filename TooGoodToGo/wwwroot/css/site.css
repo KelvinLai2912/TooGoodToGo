@@ -72,3 +72,115 @@ a.btn:hover, a.btn:focus {
     transform: translateY(-1px);
     transition: transform .12s ease;
 }
+
+:root {
+    --tg-sand: #E2E0D8;
+    --tg-sage: #B1BC9B;
+    --tg-moss: #6A8D69;
+    --tg-forest: #4F6B55;
+    --tg-pine: #2F4033;
+    --tg-text: #1c1f1d;
+    --tg-white: #fff;
+}
+
+body {
+    color: var(--tg-text);
+    background: #f8f9f8;
+}
+
+/* Navbar */
+.tg-navbar {
+    background: linear-gradient(90deg, var(--tg-forest), var(--tg-pine));
+}
+
+    .tg-navbar .nav-link, .tg-navbar .navbar-brand {
+        color: var(--tg-sand) !important;
+    }
+
+        .tg-navbar .nav-link.active, .tg-navbar .nav-link:hover {
+            color: var(--tg-white) !important;
+        }
+
+/* Hero */
+.tg-hero {
+    background: radial-gradient(1200px 600px at -10% -10%, rgba(255,255,255,.15), rgba(255,255,255,0) 40%), linear-gradient(135deg, var(--tg-moss), var(--tg-forest) 60%, var(--tg-pine));
+    color: var(--tg-white);
+}
+
+    .tg-hero .btn {
+        border-width: 2px;
+    }
+
+.tg-hero-img {
+    max-height: 420px;
+    object-fit: cover;
+}
+
+/* Cards */
+.tg-card {
+    border: 0;
+    border-radius: 1rem;
+    overflow: hidden;
+    background: var(--tg-white);
+}
+
+    .tg-card .card-header {
+        background: var(--tg-sage);
+        color: #223120;
+        font-weight: 600;
+    }
+
+    .tg-card .badge {
+        background: var(--tg-forest);
+    }
+
+    .tg-card .price {
+        color: var(--tg-forest);
+        font-weight: 700;
+    }
+
+/* Filters */
+.tg-filters {
+    background: var(--tg-sand);
+    border: 1px solid #d7d4ca;
+    border-radius: 1rem;
+}
+
+/* CTA */
+.tg-cta {
+    background: linear-gradient(135deg, #eaf4ea, var(--tg-sage));
+    border: 1px solid #cddcc8;
+    border-radius: 1.25rem;
+}
+
+/* Buttons */
+.btn-tg-primary {
+    background: var(--tg-forest);
+    color: var(--tg-sand);
+    border: 1px solid var(--tg-pine);
+}
+
+    .btn-tg-primary:hover {
+        filter: brightness(1.05);
+        color: #fff;
+    }
+
+.btn-tg-outline {
+    color: #fff;
+    border: 2px solid #fff;
+    background: transparent;
+}
+
+    .btn-tg-outline:hover {
+        background: #fff;
+        color: var(--tg-forest);
+    }
+
+/* Small motion */
+a.btn, button.btn {
+    transition: transform .12s ease, filter .12s ease;
+}
+
+    a.btn:hover, button.btn:hover {
+        transform: translateY(-1px);
+    }
