@@ -1,0 +1,107 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<section class="hero tg-hero text-white">
+    <div class="container py-5">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-6">
+                <h1 class="display-5 fw-bold mb-3">TooGoodToGo &#64; Avans</h1>
+                <p class="lead mb-4">
+                    Reserveer voordelige maaltijdpakketten en help voedselverspilling verminderen.
+                </p>
+
+                <!-- Hoofdacties -->
+                <div class="row g-2">
+                    <div class="col-12 col-sm-6">
+                        <a href="~/Account/Login" class="btn btn-light w-100 py-3 tg-btn">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>Login
+                        </a>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <a href="~/Packages" class="btn btn-outline-light w-100 py-3 tg-btn">
+                            <i class="bi bi-bag-heart me-2"></i>Bekijk pakketten
+                        </a>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <a href="~/Reservations/MyReservations" class="btn btn-outline-light w-100 py-3 tg-btn">
+                            <i class="bi bi-bookmark-check me-2"></i>Mijn reserveringen
+                        </a>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                        <a href="~/Packages/Create" class="btn btn-outline-light w-100 py-3 tg-btn">
+                            <i class="bi bi-plus-circle me-2"></i>Pakket aanbieden
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 text-center">
+                <img src="~/img/Image1.png" alt="Maaltijdpakketten" class="img-fluid rounded shadow-lg tg-hero-img">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Info Cards -->
+<section class="container my-5">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm tg-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-geo-alt fs-3 me-2"></i>
+                        <h5 class="card-title mb-0">Filter op locatie</h5>
+                    </div>
+                    <p class="card-text">
+                        Vind snel pakketten in <strong>Breda</strong>, <strong>Den Bosch</strong> of <strong>Tilburg</strong>.
+                    </p>
+                    <a href="~/Packages?city=Breda" class="stretched-link">Bekijk pakketten →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm tg-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-list-check fs-3 me-2"></i>
+                        <h5 class="card-title mb-0">Voorbeeldinhoud</h5>
+                    </div>
+                    <p class="card-text">
+                        Zie indicatieve producten per pakket—handig om te kiezen wat bij jou past.
+                    </p>
+                    <a href="~/Packages" class="stretched-link">Bekijk voorbeelden →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm tg-card">
+                <div class="card-body">
+                    <div class="d-flex align-items-center mb-3">
+                        <i class="bi bi-people fs-3 me-2"></i>
+                        <h5 class="card-title mb-0">Voor medewerkers</h5>
+                    </div>
+                    <p class="card-text">
+                        Beheer pakketten, voorkom dubbele reserveringen en markeer no-shows.
+                    </p>
+                    <a href="~/Packages/Create" class="stretched-link">Start met aanbieden →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Call to Action -->
+<section class="container my-5">
+    <div class="tg-cta p-4 p-md-5 rounded-4 text-center text-md-start d-md-flex align-items-center justify-content-between">
+        <div class="mb-3 mb-md-0">
+            <h4 class="mb-2">Klaar om te starten?</h4>
+            <p class="mb-0">Log in en maak vandaag nog impact tegen voedselverspilling.</p>
+        </div>
+        <a href="~/Account/Login" class="btn btn-dark btn-lg mt-3 mt-md-0">
+            <i class="bi bi-person-check me-2"></i>Inloggen
+        </a>
+    </div>
+</section>

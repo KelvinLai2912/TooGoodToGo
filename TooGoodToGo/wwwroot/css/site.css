@@ -1,0 +1,74 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: #056365;
+}
+
+.jumbotron-custom {
+    height: 100vh; /* This will make it span the full height of the viewport */
+    margin-bottom: 0; /* To remove the default margin */
+}
+
+.text-custom {
+    color: white !important; /* This ensures the text color is white against the background */
+}
+
+.btn-custom {
+    background-color: white;
+    color: #056365 !important;
+    border-color: white;
+}
+
+.shadow {
+    -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+}
+/* Hero */
+.tg-hero {
+    background: radial-gradient(1200px 600px at -10% -10%, rgba(255,255,255,0.15), rgba(255,255,255,0) 40%), linear-gradient(135deg, #2bb673 0%, #1e8f58 50%, #106b40 100%);
+}
+
+    .tg-hero .tg-btn {
+        border-width: 2px;
+    }
+
+.tg-hero-img {
+    max-height: 420px;
+    object-fit: cover;
+}
+
+/* Cards */
+.tg-card {
+    border: 0;
+}
+
+    .tg-card .card-body .bi {
+        color: #1e8f58;
+    }
+
+/* CTA */
+.tg-cta {
+    background: linear-gradient(135deg, #e8f6ef, #d6f3e6);
+    border: 1px solid #bfe8d5;
+}
+
+/* Hover focus states */
+a.btn:hover, a.btn:focus {
+    transform: translateY(-1px);
+    transition: transform .12s ease;
+}

@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Login Page";
+}
+
+@model TooGoodToGo.Models.LoginViewModel
+
+
+<h2>Login</h2>
+
+<form method="post" action="/Account/Login">
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="Username" required class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="Password" required class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="role">Role:</label>
+        <select id="role" name="Role" required class="form-control">
+            <option value="Student">Student</option>
+            <option value="Staff">Personeel</option>
+        </select>
+    </div>
+
+    <input type="submit" value="Login" class="btn btn-primary" />
+</form>

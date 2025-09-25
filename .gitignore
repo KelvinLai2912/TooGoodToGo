@@ -1,0 +1,39 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.cache
+*.log
+*.db
+*.opendb
+*.VC.db
+
+# Build results
+bin/
+obj/
+[Bb]uild/
+[Ll]og/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+*.nuget.props
+*.nuget.targets
+
+# IDE instellingen
+*.DotSettings.user
+*.idea/
+
+# Test results
+TestResult*/
+*.coverage
+*.coveragexml
+
+# Publish
+*.publishsettings
+
+# Backup & temporary files
+*.tmp
+*.bak
+*.swp
