@@ -1,25 +1,39 @@
+using Infrastructure.Data;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddDbContext<AppDbContext>(opt =>
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("AppDb")));
+
+builder.Services.AddDbContext<SecurityDbContext>(opt =>
+    opt.UseSqlServer(builder.Configuration.GetConnectionString("SecurityDb")));
+
+builder.Services.AddIdentityCore<IdentityUser>(o =>
+{
+    o.Password.RequireNonAlphanumeric = false;
+    o.Password.RequireUppercase = false;
+})
+.AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<SecurityDbContext>();
+
+builder.Services.AddAuthentication().AddCookie(); // of JWT
+builder.Services.AddAuthorization();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
 app.UseHttpsRedirection();
-
+app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
+app.UseSwagger();
+app.UseSwaggerUI();
 
+app.MapControllers();
 app.Run();
