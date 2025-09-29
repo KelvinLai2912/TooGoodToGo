@@ -1,0 +1,103 @@
+﻿@using Core.Domain;
+@using Core.Domain.Enumerations;
+@model EmployeeRegisterModel
+
+@{
+    ViewData["Title"] = "Employee Registration";
+}
+
+<div class="container p-3 mb-3 mb-5">
+    <h3 class="dgreen-bg-color text-white text-center p-2 mb-3 rounded shadow">@ViewData["Title"]</h3>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            @TempData["ErrorMessage"]
+        </div>
+    }
+
+    <div class="lgreen-bg-color p-3 pb-1 rounded shadow">
+
+    <form asp-action="EmployeeRegister" asp-controller="Account" method="post">
+        <div class="form-group">
+            @if (ViewData.ModelState.TryGetValue("FirstName", out var firstNameEntry) && firstNameEntry.Errors.Count > 0)
+            {
+                <div class="alert alert-danger mb-1 mt-2">
+                    @firstNameEntry.Errors[0].ErrorMessage
+                </div>
+            }
+            <label asp-for="FirstName"></label>
+            <input asp-for="FirstName" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            @if (ViewData.ModelState.TryGetValue("LastName", out var lastNameEntry) && lastNameEntry.Errors.Count > 0)
+            {
+                <div class="alert alert-danger mb-1 mt-2">
+                    @lastNameEntry.Errors[0].ErrorMessage
+                </div>
+            }
+            <label asp-for="LastName"></label>
+            <input asp-for="LastName" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            @if (ViewData.ModelState.TryGetValue("EmployeeID", out var employeeIdEntry) && employeeIdEntry.Errors.Count > 0)
+            {
+                <div class="alert alert-danger mb-1 mt-2">
+                    @employeeIdEntry.Errors[0].ErrorMessage
+                </div>
+            }
+            <label asp-for="EmployeeID"></label>
+            <input asp-for="EmployeeID" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            @if (ViewData.ModelState.TryGetValue("WorkPlace", out var workPlaceEntry) && workPlaceEntry.Errors.Count > 0)
+            {
+                <div class="alert alert-danger mb-1 mt-2">
+                    @workPlaceEntry.Errors[0].ErrorMessage
+                </div>
+            }
+            <label asp-for="WorkPlace"></label>
+            <select asp-for="WorkPlace" class="form-control" asp-items="Html.GetEnumSelectList<CanteenEnum>()">
+                <option value="" selected disabled>Please select a canteen</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            @if (ViewData.ModelState.TryGetValue("Password", out var passwordEntry) && passwordEntry.Errors.Count > 0)
+            {
+                <div class="alert alert-danger mb-1 mt-2">
+                    @passwordEntry.Errors[0].ErrorMessage
+                </div>
+            }
+            <label asp-for="Password"></label>
+            <input type="password" asp-for="Password" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            @if (ViewData.ModelState.TryGetValue("PasswordReEntry", out var passwordReEntry) && passwordReEntry.Errors.Count > 0)
+            {
+                <div class="alert alert-danger mb-1 mt-2">
+                    @passwordReEntry.Errors[0].ErrorMessage
+                </div>
+            }
+            <label asp-for="PasswordReEntry"></label>
+            <input type="password" asp-for="PasswordReEntry" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-green-color card-text px-4 me-sm-3 text-white">Register</button>
+    </form>
+
+    <p>Already have an account? Click <a class="link" asp-action="Login" asp-controller="Account">here</a> to login</p>
+
+    </div>
+</div>
