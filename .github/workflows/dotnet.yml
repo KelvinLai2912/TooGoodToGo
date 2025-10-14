@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SOLUTION_OR_PROJECT: './TooGoodToGo.sln'
-      WEBAPP_PROJECT: 'src/TooGoodToGo/TooGoodToGo.csproj'
+      WEBAPP_PROJECT: 'TooGoodToGo/TooGoodToGo.csproj'
       PUBLISH_DIR: 'artifacts/publish'
 
     steps:
