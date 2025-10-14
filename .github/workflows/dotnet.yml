@@ -1,28 +1,66 @@
-# This workflow will build a .NET project
-# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
-
-name: .NET
+name: Build & Deploy ASP.NET Core to Azure Web App
 
 on:
   push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    env:
+      SOLUTION_OR_PROJECT: './TooGoodToGo.sln'
+      PUBLISH_DIR: 'artifacts/publish'
 
     steps:
-    - uses: actions/checkout@v4
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v4
-      with:
-        dotnet-version: 8.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore
+        run: dotnet restore $SOLUTION_OR_PROJECT
+
+      - name: Build (Release)
+        run: dotnet build $SOLUTION_OR_PROJECT --configuration Release --no-restore
+
+      - name: Test
+        run: dotnet test $SOLUTION_OR_PROJECT --configuration Release --no-build --logger "trx;LogFileName=test_results.trx"
+
+      - name: Publish
+        run: |
+          rm -rf $PUBLISH_DIR
+          mkdir -p $PUBLISH_DIR
+          # Als je een solution hebt met 1 Web project, kan dit ook direct naar dat .csproj:
+          # dotnet publish ./src/WebApp/WebApp.csproj -c Release -o $PUBLISH_DIR
+          dotnet publish $SOLUTION_OR_PROJECT -c Release -o $PUBLISH_DIR
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dotnet-app
+          path: artifacts/publish
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: Production
+      url: ${{ steps.deploy.outputs.webapp-url }}
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: dotnet-app
+          path: app
+
+      - name: Deploy to Azure Web App
+        id: deploy
+        uses: azure/webapps-deploy@v3
+        with:
+          app-name: 'TooGoodToGo'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          package: app
