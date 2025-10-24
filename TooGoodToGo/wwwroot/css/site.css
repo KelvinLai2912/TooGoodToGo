@@ -1,29 +1,38 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
 
+/* Kelvin's kleuren */
 :root {
-    /* pas deze 3 aan naar jouw (Kelvin) kleuren */
-    --tg-primary: #00b894; /* hoofdkleur */
-    --tg-accent: #ff7675; /* accent */
-    --tg-dark: #0f172a; /* donker voor contrast */
+    --tg-base: #DAD7CD; /* lichte achtergrond */
+    --tg-accent: #A3B18A; /* zacht groen (accent/secondary) */
+    --tg-primary: #588157; /* primair groen (brand/knoppen) */
+    --tg-deep: #3A5A40; /* donker groen (hover, headers) */
+    --tg-dark: #344E41; /* diep donker (tekst/contrast) */
 }
 
+/* Tekst/achtergrond basis (optioneel) */
+body {
+    background-color: var(--tg-base);
+    color: var(--tg-dark);
+}
+
+/* Buttons */
 .btn-tg-primary {
     background: var(--tg-primary);
     border-color: var(--tg-primary);
@@ -46,8 +55,23 @@ body {
         color: #fff;
     }
 
+/* Donkere (CTA) knop in je palet */
+.btn-tg-dark {
+    background: var(--tg-deep);
+    border-color: var(--tg-deep);
+    color: #fff;
+}
+
+    .btn-tg-dark:hover {
+        background: var(--tg-dark);
+        border-color: var(--tg-dark);
+        color: #fff;
+    }
+
+/* Hero */
 .tg-hero {
-    background: radial-gradient(80% 120% at 0% 0%, rgba(255,255,255,0.08), rgba(0,0,0,0.45)), linear-gradient(120deg, var(--tg-dark), #1f2937);
+    /* subtiele noise-gradiënt met jouw groenen */
+    background: radial-gradient(80% 120% at 0% 0%, rgba(255,255,255,0.06), rgba(0,0,0,0.35)), linear-gradient(120deg, var(--tg-dark), var(--tg-deep));
 }
 
     .tg-hero .display-5 {
@@ -69,21 +93,26 @@ body {
     filter: grayscale(100%);
 }
 
+/* Cards */
 .tg-card .card-header {
     background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent);
     border-bottom: 0;
     font-weight: 600;
+    color: var(--tg-dark);
 }
 
 .tg-card .card-body p {
     margin-bottom: .5rem;
 }
 
+/* CTA box met border-gradient in jouw kleuren */
 .tg-cta {
-    background: linear-gradient(90deg, var(--tg-primary), rgba(0,0,0,0)) padding-box, linear-gradient(90deg, var(--tg-primary), var(--tg-accent)) border-box;
+    background: linear-gradient(90deg, var(--tg-accent), rgba(0,0,0,0)) padding-box, linear-gradient(90deg, var(--tg-primary), var(--tg-deep)) border-box;
     border: 2px solid transparent;
+    border-radius: 1rem;
 }
 
+/* Badges */
 .tg-badge {
     background: var(--tg-primary);
     color: #fff;
@@ -94,9 +123,18 @@ body {
 }
 
 .tg-badge-soft {
-    background: rgba(0,184,148,.12);
+    background: rgba(88,129,87,.12); /* #588157 @ 12% */
     color: var(--tg-primary);
     border-radius: 999px;
     padding: .35rem .7rem;
     font-weight: 600;
 }
+
+/* Links in cards subtiel in palet (optioneel) */
+a {
+    color: var(--tg-deep);
+}
+
+    a:hover {
+        color: var(--tg-dark);
+    }
