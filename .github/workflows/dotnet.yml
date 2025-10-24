@@ -1,4 +1,4 @@
-name: Build & Deploy ASP.NET Core to Azure Web App
+name: Build & Deploy ASP.NET Core WebApp to Azure Web App
 
 on:
   push:
@@ -9,9 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      SOLUTION_OR_PROJECT: './TooGoodToGo.sln'
       WEBAPP_PROJECT: 'TooGoodToGo/TooGoodToGo.csproj'
-      PUBLISH_DIR: 'artifacts/publish'
 
     steps:
       - uses: actions/checkout@v4
@@ -22,25 +20,22 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore
-        run: dotnet restore $SOLUTION_OR_PROJECT
+        run: dotnet restore $WEBAPP_PROJECT
 
       - name: Build (Release)
-        run: dotnet build $SOLUTION_OR_PROJECT --configuration Release --no-restore
+        run: dotnet build $WEBAPP_PROJECT --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test $SOLUTION_OR_PROJECT --configuration Release --no-build --logger "trx;LogFileName=test_results.trx"
+        run: dotnet test ./TooGoodToGo.sln --configuration Release --no-build --logger "trx;LogFileName=test_results.trx"
 
-      - name: Publish WebApp only
-        run: |
-          rm -rf "$PUBLISH_DIR"
-          mkdir -p "$PUBLISH_DIR"
-          dotnet publish "$WEBAPP_PROJECT" -c Release -o "$PUBLISH_DIR"
+      - name: Publish WebApp
+        run: dotnet publish $WEBAPP_PROJECT -c Release -o ${{ env.DOTNET_ROOT }}/myapp
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: dotnet-app
-          path: artifacts/publish
+          path: ${{ env.DOTNET_ROOT }}/myapp
 
   deploy:
     runs-on: ubuntu-latest
@@ -54,12 +49,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dotnet-app
-          path: app
 
       - name: Deploy to Azure Web App
         id: deploy
         uses: azure/webapps-deploy@v3
         with:
-          app-name: 'TooGoodToGo'
+          app-name: 'TooGoodToGo' 
+          slot-name: 'Production'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: app
+          package: .
