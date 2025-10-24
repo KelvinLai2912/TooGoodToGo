@@ -30,13 +30,11 @@ jobs:
       - name: Test
         run: dotnet test $SOLUTION_OR_PROJECT --configuration Release --no-build --logger "trx;LogFileName=test_results.trx"
 
-      - name: Publish
+      - name: Publish WebApp only
         run: |
-          rm -rf $PUBLISH_DIR
-          mkdir -p $PUBLISH_DIR
-          # Als je een solution hebt met 1 Web project, kan dit ook direct naar dat .csproj:
-          # dotnet publish ./src/WebApp/WebApp.csproj -c Release -o $PUBLISH_DIR
-          dotnet publish $SOLUTION_OR_PROJECT -c Release -o $PUBLISH_DIR
+          rm -rf "$PUBLISH_DIR"
+          mkdir -p "$PUBLISH_DIR"
+          dotnet publish "$WEBAPP_PROJECT" -c Release -o "$PUBLISH_DIR"
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
