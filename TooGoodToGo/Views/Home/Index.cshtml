@@ -1,5 +1,7 @@
-﻿@{
+﻿@using Portal.ExtensionMethods
+@{
     ViewData["Title"] = "Home";
+    var role = this.User.GetRole();
 }
 
 <!-- Hero -->
@@ -10,39 +12,87 @@
 
                 <h1 class="display-5 fw-bold mb-3">TooGoodToGo &#64; Avans</h1>
                 <p class="lead mb-4">
-                    Reserveer voordelige maaltijdpakketten en help voedselverspilling verminderen.
+                    Reserve affordable meal packages and help reduce food waste.
                 </p>
 
                 <div class="row g-2">
+
+                    <!-- Package button -->
                     <div class="col-12 col-sm-6">
-                        <a asp-controller="Package" asp-action="AvailablePackages" class="btn btn-tg-outline w-100 py-3">
-                            <i class="bi bi-bag-heart me-2"></i>Bekijk pakketten
-                        </a>
+                        @if (!User.Identity!.IsAuthenticated)
+                        {
+                            <!-- Not logged in: go to Login as Student -->
+                            <a href="@Url.Action("Login", "Account", new { returnUrl = Url.Action("AvailablePackages", "Package"), role = "Student" })"
+                               class="btn btn-tg-outline w-100 py-3">
+                                <i class="bi bi-bag-heart me-2"></i>View packages
+                            </a>
+                        }
+                        else if (role == "Student")
+                        {
+                            <a asp-controller="Package" asp-action="AvailablePackages"
+                               class="btn btn-tg-outline w-100 py-3">
+                                <i class="bi bi-bag-heart me-2"></i>View packages
+                            </a>
+                        }
+                        else if (role == "Employee")
+                        {
+                            <a asp-controller="Package" asp-action="AvailablePackages"
+                               class="btn btn-tg-outline w-100 py-3">
+                                <i class="bi bi-bag-heart me-2"></i>All packages
+                            </a>
+                        }
                     </div>
+
+                    <!-- Reservations button -->
                     <div class="col-12 col-sm-6">
-                        <a asp-controller="Package" asp-action="MyReservations" class="btn btn-tg-outline w-100 py-3">
-                            <i class="bi bi-bookmark-check me-2"></i>Mijn reserveringen
-                        </a>
+                        @if (!User.Identity!.IsAuthenticated)
+                        {
+                            <!-- Not logged in: go to Login as Student -->
+                            <a href="@Url.Action("Login", "Account", new { returnUrl = Url.Action("MyReservations", "Package"), role = "Student" })"
+                               class="btn btn-tg-outline w-100 py-3">
+                                <i class="bi bi-bookmark-check me-2"></i>My reservations
+                            </a>
+                        }
+                        else if (role == "Student")
+                        {
+                            <a asp-controller="Package" asp-action="MyReservations"
+                               class="btn btn-tg-outline w-100 py-3">
+                                <i class="bi bi-bookmark-check me-2"></i>My reservations
+                            </a>
+                        }
                     </div>
-                    @if (User.IsInRole("KantineMedewerker"))
+
+                    <!-- Offer package (Employee only) -->
+                    @if (role == "Employee")
                     {
                         <div class="col-12 col-sm-6">
-                            <a asp-controller="Packages" asp-action="Create" class="btn btn-tg-outline w-100 py-3">
-                                <i class="bi bi-plus-circle me-2"></i>Pakket aanbieden
+                            <a asp-controller="Package" asp-action="CreatePackage"
+                               class="btn btn-tg-outline w-100 py-3">
+                                <i class="bi bi-plus-circle me-2"></i>Offer package
                             </a>
                         </div>
                     }
+                    else if (!User.Identity!.IsAuthenticated)
+                    {
+                        <div class="col-12 col-sm-6">
+                            <a href="@Url.Action("Login", "Account", new { returnUrl = Url.Action("CreatePackage", "Package"), role = "Employee" })"
+                               class="btn btn-tg-outline w-100 py-3">
+                                <i class="bi bi-plus-circle me-2"></i>Offer package (for employees)
+                            </a>
+                        </div>
+                    }
+
                 </div>
 
                 <div class="d-flex align-items-center flex-wrap gap-4 mt-4 small opacity-75">
                     <div><i class="bi bi-geo-alt me-1"></i> Breda · Den Bosch · Tilburg</div>
-                    <div><i class="bi bi-people me-1"></i> Studenten & medewerkers</div>
+                    <div><i class="bi bi-people me-1"></i> Students & staff</div>
                 </div>
             </div>
 
             <div class="col-lg-6 text-center">
                 <div class="position-relative">
-                    <img src="~/img/Image1.png" class="img-fluid rounded shadow-lg tg-hero-img" alt="Maaltijdpakketten" />
+                    <img src="~/img/Image1.png" class="img-fluid rounded shadow-lg tg-hero-img" alt="Meal packages" />
                 </div>
             </div>
         </div>
@@ -55,33 +105,33 @@
         <div class="col-md-4">
             <div class="card tg-card h-100 shadow-sm">
                 <div class="card-header d-flex align-items-center gap-2">
-                    <i class="bi bi-geo-alt"></i><span>Filter op locatie</span>
+                    <i class="bi bi-geo-alt"></i><span>Filter by location</span>
                 </div>
                 <div class="card-body">
-                    <p>Vind snel pakketten in jouw stad en favoriete kantine.</p>
-                    <a asp-controller="Packages" asp-action="Index" class="stretched-link">Naar pakketten →</a>
+                    <p>Quickly find packages in your city and favorite canteen.</p>
+                    <a asp-controller="Package" asp-action="AvailablePackages" class="stretched-link">To packages →</a>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card tg-card h-100 shadow-sm">
                 <div class="card-header d-flex align-items-center gap-2">
-                    <i class="bi bi-list-check"></i><span>Voorbeeldinhoud</span>
+                    <i class="bi bi-list-check"></i><span>Sample contents</span>
                 </div>
                 <div class="card-body">
-                    <p>Zie indicatieve producten per pakket—handig om te kiezen.</p>
-                    <a asp-controller="Packages" asp-action="Index" class="stretched-link">Bekijk →</a>
+                    <p>See indicative products per package—helpful for choosing.</p>
+                    <a asp-controller="Package" asp-action="AvailablePackages" class="stretched-link">View →</a>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card tg-card h-100 shadow-sm">
                 <div class="card-header d-flex align-items-center gap-2">
-                    <i class="bi bi-shield-check"></i><span>18+ controle</span>
+                    <i class="bi bi-shield-check"></i><span>18+ check</span>
                 </div>
                 <div class="card-body">
-                    <p>Alcoholhoudende pakketten alleen zichtbaar voor 18+ studenten.</p>
-                    <span class="badge tg-badge-soft">Regel actief</span>
+                    <p>Alcohol-containing packages are only visible to 18+ students.</p>
+                    <span class="badge tg-badge-soft">Rule active</span>
                 </div>
             </div>
         </div>
@@ -92,12 +142,23 @@
 <section class="container my-5">
     <div class="tg-cta p-4 p-md-5 d-md-flex align-items-center justify-content-between rounded-4">
         <div class="mb-3 mb-md-0">
-            <h4 class="mb-2">Klaar om te starten?</h4>
-            <p class="mb-0">Log in en maak vandaag nog impact tegen voedselverspilling.</p>
+            <h4 class="mb-2">Ready to get started?</h4>
+            <p class="mb-0">Log in and make an impact against food waste today.</p>
         </div>
-        <a asp-controller="Account" asp-action="Login" class="btn btn-tg-dark btn-lg mt-3 mt-md-0">
 
-            <i class="bi bi-person-check me-2"></i>Inloggen
-        </a>
+        @if (!User.Identity!.IsAuthenticated)
+        {
+            <a href="@Url.Action("Login", "Account", new { returnUrl = Url.Action("AvailablePackages", "Package") })"
+               class="btn btn-tg-dark btn-lg mt-3 mt-md-0">
+                <i class="bi bi-person-check me-2"></i>Login
+            </a>
+        }
+        else
+        {
+            <a asp-controller="Account" asp-action="Logout"
+               class="btn btn-tg-dark btn-lg mt-3 mt-md-0">
+                <i class="bi bi-box-arrow-right me-2"></i>Logout
+            </a>
+        }
     </div>
 </section>
