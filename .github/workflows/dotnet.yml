@@ -29,9 +29,8 @@ jobs:
         run: dotnet build ./TooGoodToGo.sln --configuration Release --no-restore
 
       - name: Test (xUnit + coverage)
-        run: dotnet test ./TooGoodToGo.sln --configuration Release --no-build \
-              --logger "trx;LogFileName=test_results.trx" \
-              --collect:"XPlat Code Coverage"
+        run: dotnet test ./TooGoodToGo.sln --configuration Release --no-build --logger "trx;LogFileName=test_results.trx" --collect:"XPlat Code Coverage"
+
 
       - name: Upload test results
         if: always()
