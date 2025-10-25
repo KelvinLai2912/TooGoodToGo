@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     env:
       WEBAPP_PROJECT: 'TooGoodToGo/TooGoodToGo.csproj'
-      ConnectionStrings__AppDb: ${{ secrets.ConnectionStrings__AppDb }}
-      ConnectionStrings__SecurityDb: ${{ secrets.ConnectionStrings__SecurityDb }}
+      # ConnectionStrings__AppDb: ${{ secrets.ConnectionStrings__AppDb }}
+      # ConnectionStrings__SecurityDb: ${{ secrets.ConnectionStrings__SecurityDb }}
 
     steps:
       - uses: actions/checkout@v4
