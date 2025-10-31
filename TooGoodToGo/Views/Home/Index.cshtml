@@ -9,14 +9,12 @@
     <div class="container py-5">
         <div class="row align-items-center g-4">
             <div class="col-lg-6">
-
                 <h1 class="display-5 fw-bold mb-3">TooGoodToGo &#64; Avans</h1>
                 <p class="lead mb-4">
                     Reserve affordable meal packages and help reduce food waste.
                 </p>
 
                 <div class="row g-2">
-
                     <!-- Package button -->
                     <div class="col-12 col-sm-6">
                         @if (!User.Identity!.IsAuthenticated)
@@ -81,7 +79,6 @@
                             </a>
                         </div>
                     }
-
                 </div>
 
                 <div class="d-flex align-items-center flex-wrap gap-4 mt-4 small opacity-75">
@@ -94,6 +91,52 @@
                 <div class="position-relative">
                     <img src="~/img/Image1.png" class="img-fluid rounded shadow-lg tg-hero-img" alt="Meal packages" />
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About / Sustainability (toegevoegd) -->
+<section id="about-section" class="py-5">
+    <div class="container px-5 my-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-6">
+                <img class="img-fluid rounded mb-5 mb-lg-0 shadow"
+                     src="https://punt.avans.nl/app/uploads/2022/09/Eurest.jpg"
+                     alt="People in an Avans canteen" loading="lazy" />
+            </div>
+            <div class="col-lg-6">
+                <h2 class="fw-bolder">Our Commitment to Sustainability</h2>
+                <p class="lead fw-normal text-darkgreen mb-0">
+                    Avans University of Applied Sciences is strongly committed to sustainability and reducing waste.
+                    To help minimize food waste on campus, a new platform inspired by “Too Good To Go” has been developed exclusively for Avans students.
+                    Every day, the canteens in Breda, Tilburg, and Den Bosch offer discounted meal boxes that students can easily reserve online.
+                    This approach not only helps prevent good food from being thrown away but also makes sustainable eating more affordable for everyone.
+                    The project is a collaboration between Avans’ IT students and campus facilities, showing how technology can contribute to a greener future.
+                </p>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Avans (toegevoegd) -->
+<section class="py-5 green-bg-color">
+    <div class="container px-5 my-5">
+        <div class="row gx-5 align-items-center">
+            <div class="col-lg-6 order-first order-lg-last">
+                <img class="img-fluid rounded mb-5 mb-lg-0"
+                     src="https://www.avans.nl/img/Logo-International-Grey.svg?v=4.4.0-021023-1837"
+                     alt="Avans University of Applied Sciences logo" loading="lazy" />
+            </div>
+            <div class="col-lg-6">
+                <h2 class="fw-bolder">About Avans</h2>
+                <p class="lead fw-normal mb-0">
+                    Avans University of Applied Sciences is known for its high-quality education and innovative mindset.
+                    Across our lively campuses in Breda, Tilburg, and Den Bosch, we challenge students to develop their talents and make a difference.
+                    At Avans, we believe in collaboration, sustainability, and creating real impact through education and technology.
+                </p>
+
             </div>
         </div>
     </div>
@@ -131,7 +174,6 @@
                 </div>
                 <div class="card-body">
                     <p>Alcohol-containing packages are only visible to 18+ students.</p>
-                    <span class="badge tg-badge-soft">Rule active</span>
                 </div>
             </div>
         </div>
